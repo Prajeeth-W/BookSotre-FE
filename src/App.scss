@@ -1,0 +1,20 @@
+$primary: rgba(83, 249, 83, 0.706);
+$btn-border-radius: 25px;
+$btn-padding-y:  5px ;             
+$btn-padding-x: 20px;
+
+.user-area {
+    color: $primary;
+}
+
+html,body{
+    background-color: #e7fcfbf3 !important;
+}
+.login-box{
+    max-width : 450px;
+    padding: 25px 25px;
+    margin: 75px auto;
+    background-color: #fdeaea;
+}
+
+@import '~bootstrap/scss/bootstrap';
