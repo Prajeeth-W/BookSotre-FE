@@ -12,40 +12,41 @@ import Login from './pages/Auth/Login';
 import ProtectedRoute from './utils/ProtectedRoute';
 import Books from './pages/Books/Books';
 import Profile from './pages/Profile';
-import ShoppingCart from './pages/Cart/ShoppingCart';
-import CartIcon from './pages/Cart/CartIcon';
+import { BookstoreContextProvider } from './contexts/BookstoreContext';
+/* import ShoppingCart from './pages/Cart/ShoppingCart';*/
+import CartIcon from './pages/Cart/CartIcon'; 
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
+      <BookstoreContextProvider>
+        <BrowserRouter>
+          <Routes>
 
-          {/* <Route path='/' element={<Layout />}>     // <<< Mind <<<  Add layout
+            {/* <Route path='/' element={<Layout />}>     // <<< Mind <<<  Add layout
 
               <Route path='/' element={<Home />} />
               <Route path='/user' element={<User />} />
               <Route path="/help" element={<Help />} />
           </Route> */}
 
-          <Route path='/' element={<ProtectedRoute />}>
-            <Route path='/' element={<Layout />}>
-              <Route path='/' element={<Home />} />
-              <Route path='/books' element={<Books />} />
-              <Route path='/profile' element={<Profile />} />
-              <Route path='/user' element={<User />} />
-              <Route path="/help" element={<Help />} />
-              <Route path="/cart" element={<CartIcon/>} />
+            <Route path='/' element={<ProtectedRoute />}>
+              <Route path='/' element={<Layout />}>
+                <Route path='/' element={<Home />} />
+                <Route path='/books' element={<Books />} />
+                <Route path='/profile' element={<Profile />} />
+                <Route path='/user' element={<User />} />
+                <Route path="/help" element={<Help />} />
+                <Route path="/cart" element={<CartIcon/>} />
+              </Route>
             </Route>
-          </Route>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-        </Routes>
-      </BrowserRouter>
-
-
+          </Routes>
+        </BrowserRouter>
+      </BookstoreContextProvider>
     </div>
   );
 }

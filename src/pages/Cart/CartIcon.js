@@ -1,23 +1,41 @@
-import React, { useContext, useEffect,useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Row, Col, Button, Table, Modal, Form, FormGroup, FormSelect } from "react-bootstrap";
 import Home from '../Home/Home';
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../MyContext';
+import { BookstoreContext } from '../../contexts/BookstoreContext';
+
 
 function CartIcon() {
 
-
+  const [cart, setCart] = useState([]);
+  const { cartItems, addToCart, removeFromCart, updateCartItemCount } = useContext(BookstoreContext)
   const { text, setText } = useContext(MyContext);
 
   useEffect(() => {
     console.log("text is :" + text)
-  }, [])
+    console.log("--cart items---", cartItems);
+    setCart(cartItems)
+  }, [cartItems])
+
+  const arrayDataItems = cartItems.map(book => 
+    <li key={book.id}>
+      <p>{book.title}</p>
+      <span>{book.qty}</span>
+    </li>
+
+  );
 
   return (
     <div>
+      <ul>{arrayDataItems}</ul>
+
       <h1>{text}</h1>
-      <button onClick={() => setText('Hello, world!')}>
-        Click me
+      <button onClick={() => {
+        const newText = 'Hello, world!';
+        setText(newText);
+      }}>
+        Checkout
       </button>
 
     </div>

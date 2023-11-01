@@ -1,4 +1,4 @@
-import { useEffect, useState, React } from "react";
+import { useEffect, useState, React, useContext } from "react";
 import { getBooks } from "../../services/bookService";
 import { Row, Col, Button, Table, Modal, Form, FormGroup, FormSelect } from "react-bootstrap";
 import { getUsers } from "../../services/userService";
@@ -7,7 +7,9 @@ import { createOrder } from "../../services/orderService";
 import HomeCarousel from './HomeCarousel';
 
 import CartIcon from "../Cart/CartIcon";
+
 import { MyContext } from "../../MyContext";
+import { BookstoreContext } from "../../contexts/BookstoreContext";
 
 const Home = (props) => {
 
@@ -22,6 +24,8 @@ const Home = (props) => {
     const [orderData, setOrderData] = useState(null);
 
     const [text, setText] = useState("First text");
+
+    const { addToCart, cartItems } = useContext(BookstoreContext);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -53,6 +57,8 @@ const Home = (props) => {
 
         setOrder(updatedArray);
         console.log(order);
+
+        addToCart(book.id);
 
         const updatedTotal = total + book.price;
         setTotal(updatedTotal);
@@ -95,7 +101,7 @@ const Home = (props) => {
 
     return (
         <div>
-            <div>{props.propValue}</div>
+            {/* <div>{props.propValue}</div> */}
 
             <div>
                 <HomeCarousel />
@@ -198,7 +204,7 @@ const Home = (props) => {
             </Modal>
 
             <div>
-                <MyContext.Provider value={{ text,setText }}>
+                <MyContext.Provider value={{ text, setText }}>
                     <CartIcon />
                 </MyContext.Provider>
             </div>
